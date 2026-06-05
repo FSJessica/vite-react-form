@@ -11,7 +11,12 @@ function App(){
   });
 
   const handleChange = (e) => {
-
+    const {name, value, type, checked} = e.target;
+    console.log(name);
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value
+    });
   };
 
   return(
@@ -53,7 +58,7 @@ function App(){
           type="radio"
           name="radio"
           value='option1'
-          value={formData.radio === 'option1'}
+          checked={formData.radio === 'option1'}
           onChange={handleChange}>
         </input>
         Option 1
@@ -64,7 +69,7 @@ function App(){
           type="radio"
           name="radio"
           value='option2'
-          value={formData.radio === 'option2'}
+          checked={formData.radio === 'option2'}
           onChange={handleChange}>
         </input>
         Option 2
@@ -74,17 +79,25 @@ function App(){
         {/* Dropdown */}
         <div className="form-field">
           <label>Select:</label>
-          <select>
+          <select
             name="select"
             value={formData.select}
-            onChange={handleChange}
+            onChange={handleChange}>
             <option value="">--choose an option--</option>
-            <option value="Option1">--option1--</option>
+            <option value="option1">--option1--</option>
             <option value="option2">--option2--</option>
-
           </select>
+        </div>
 
-        </div> 
+        <div className="form-data">
+          <h3> Form Data</h3>
+          <p><strong>Text:</strong>{formData.text || 'N/A'}</p>
+          <p><strong>Checkbox:</strong>{formData.checkbox ? 'Checked' : 'Unchecked'}</p>
+          <p><strong>Radio:</strong>{formData.radio || 'N/A'}</p>
+          <p><strong>Select:</strong>{formData.select || 'N/A'}</p>
+        
+        </div>
+
         </div>
       </form>
     </div>
